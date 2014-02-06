@@ -65,7 +65,7 @@ abstract class controller
     //Add messages to the view if any found
     if ($this->getContext()->getParameter('messages'))
     {
-      $this->viewVariables['messages'] = $this->getContext()->getParameter('messages');
+      $this->viewVariables['messages'] = urldecode($this->getContext()->getParameter('messages'));
     }
   }
   

@@ -10,9 +10,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <?php if ($isMobile): ?>
-  <meta name="viewport" content="width=320" />
-  <?php endif; ?>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <title>GestionLite - <?php echo strip_tags($title); ?></title>
   <link rel="stylesheet" type="text/css" href="<?php echo APACHE_DIRECTORY_PREFIX; ?>css/layout.css" />
 </head>

@@ -48,7 +48,8 @@ class controller_movement_update extends controller
         if (isset($massagedValues['date_passed'])) {
           $parameters['month'] = substr($massagedValues['date_passed'], 0, 7);
         }
-        $this->forward($this->module, CONTROLLER_DEFAULT_ACTION, $parameters);
+          header('Location: ' . APACHE_DIRECTORY_PREFIX . $this->module . '/' . CONTROLLER_DEFAULT_ACTION . '?' . http_build_query($parameters, null, '&'));
+          exit;
       }
       
       //Update/creation failed, load account from data

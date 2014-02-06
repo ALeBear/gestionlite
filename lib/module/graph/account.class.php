@@ -25,10 +25,16 @@ class controller_graph_account extends controller
     $this->viewVariables['graphAccounts'] = array();
     $this->viewVariables['graphType'] = 'bar';
     $this->viewVariables['report'] = 'expenses';
-    $this->viewVariables['showValues'] = true;
-    
+      $this->viewVariables['showValues'] = true;
+      $this->viewVariables['allMonths'] = movement::getMonthsWithMovements();
+      $this->viewVariables['startMonth'] = end($this->viewVariables['allMonths']);
+      $this->viewVariables['endMonth'] = reset($this->viewVariables['allMonths']);
+      $this->viewVariables['allMonths'] = movement::getMonthsWithMovements();
+
     if (count($_POST) && isset($_POST['graphAccounts']))
     {
+        $this->viewVariables['startMonth'] = $_POST['startMonth'];
+        $this->viewVariables['endMonth'] = $_POST['endMonth'];
       $this->viewVariables['report'] = $_POST['report'];
       $this->viewVariables['graphAccounts'] = $_POST['graphAccounts'];
       $this->viewVariables['graphType'] = $_POST['graphType'];
@@ -62,16 +68,16 @@ class controller_graph_account extends controller
         switch ($this->viewVariables['report'])
         {
           case 'expenses':
-            $data = $anAccount->getExpensesPerMonth(movement::getFirstMovementTimestamp(), time());
+            $data = $anAccount->getExpensesPerMonth(strtotime($this->viewVariables['startMonth'] . '-01'), strtotime($this->viewVariables['endMonth'] . '-01 +1 MONTH -1 DAY'));
             break;
           case 'credits':
-            $data = $anAccount->getCreditsPerMonth(movement::getFirstMovementTimestamp(), time());
+            $data = $anAccount->getCreditsPerMonth(strtotime($this->viewVariables['startMonth'] . '-01'), strtotime($this->viewVariables['endMonth'] . '-01 +1 MONTH -1 DAY'));
             break;
           case 'expenses-internals':
-            $data = $anAccount->getExpensesPerMonth(movement::getFirstMovementTimestamp(), time(), true);
+            $data = $anAccount->getExpensesPerMonth(strtotime($this->viewVariables['startMonth'] . '-01'), strtotime($this->viewVariables['endMonth'] . '-01 +1 MONTH -1 DAY'), true);
             break;
           case 'credits-internals':
-            $data = $anAccount->getCreditsPerMonth(movement::getFirstMovementTimestamp(), time(), true);
+            $data = $anAccount->getCreditsPerMonth(strtotime($this->viewVariables['startMonth'] . '-01'), strtotime($this->viewVariables['endMonth'] . '-01 +1 MONTH -1 DAY'), true);
             break;
         }
         $graph->addValues($anAccount->getName(), $data);

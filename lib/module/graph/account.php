@@ -49,7 +49,18 @@
   <input type="radio" name="graphType" value="<?php echo glGraph::TYPE_BAR; ?>"<?php if (!$graphType || $graphType == glGraph::TYPE_BAR) echo ' checked="checked"' ?> />Barres
   <input type="radio" name="graphType"  value="<?php echo glGraph::TYPE_LINE; ?>"<?php if ($graphType == glGraph::TYPE_LINE) echo ' checked="checked"' ?> />Lignes
   &nbsp;
-  <input type="checkbox" name="showValues" value="1"<?php if ($showValues) echo ' checked="checked"' ?> /> Avec valeurs
+  <input type="checkbox" name="showValues" value="1"<?php if ($showValues) echo ' checked="checked"' ?> /> Avec valeurs<br/>
+  Mois: De : <select name="startMonth">
+<?php foreach ($allMonths as $aMonth):?>
+    <?php $isSelected = $startMonth == $aMonth ? ' selected="selected"' : ''; ?>
+    <option value="<?php echo $aMonth; ?>"<?php echo $isSelected; ?>><?php echo $aMonth; ?></option>
+<?php endforeach; ?>
+  </select>  À : <select name="endMonth">
+            <?php foreach ($allMonths as $aMonth):?>
+                <?php $isSelected = $endMonth == $aMonth ? ' selected="selected"' : ''; ?>
+                <option value="<?php echo $aMonth; ?>"<?php echo $isSelected; ?>><?php echo $aMonth; ?></option>
+            <?php endforeach; ?>
+        </select><br/>
   <input type="submit" value="Afficher" />
 </td></tr>
 </table>
