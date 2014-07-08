@@ -114,15 +114,6 @@ abstract class observablePersistent extends listenable implements persistent
     }
 
     /**
-     * @return $this
-     */
-    public function setDeleted()
-    {
-        $this->deleted = true;
-        return $this;
-    }
-
-    /**
      * Saves the object into the persistence
      *
      * @return persistent The current object
