@@ -5,7 +5,9 @@
  */
 
 //Directory prefix for the Apache host ('/' for no prefix, and prefix must end with a /)
-define('APACHE_DIRECTORY_PREFIX', '/gestionlite/');
+$matches = array();
+preg_match('|(/gestionlite[^/]*/)|', $_SERVER['REQUEST_URI'], $matches);
+define('APACHE_DIRECTORY_PREFIX', $matches[0]);
 
 //Authentication user/pass
 define('ADMIN_USERNAME', 'lagestion');
@@ -13,7 +15,7 @@ define('ADMIN_PASSWORD', 'cestnul');
 
 //DB constants
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'gestionlite');
+define('DB_NAME', substr(APACHE_DIRECTORY_PREFIX, 1, -1));
 define('DB_USER', 'gestionlite');
 define('DB_PASS', 'lr9w3');
 
