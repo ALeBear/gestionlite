@@ -8,5 +8,8 @@
 /**
  * Model exception class
  */
-class modelException extends Exception {}
+class modelException extends Exception
+{
+}
+
 ?>
