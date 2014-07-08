@@ -98,7 +98,7 @@ abstract class observablePersistent extends listenable implements persistent
      */
     public static function delete($instance)
     {
-        $instance->setDeleted();
+        $instance->setDeleted(true);
         return $instance->save();
     }
 
