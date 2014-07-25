@@ -15,7 +15,12 @@
   <td class="header">Montant</td>
   <td class="header">Actions</td>
 </tr>
-<?php foreach ($list as $anItem): ?>
+<?php 
+    $totalProv = $totalPmt = 0;
+    foreach ($list as $anItem):
+         preg_match('/^Prov/', $anItem->getLabel()) && $totalProv += $anItem->getAmount();
+         preg_match('/^Pmt/', $anItem->getLabel()) && $totalPmt += $anItem->getAmount();
+?>
 <tr>
   <td><?php echo $anItem->getLabel(); ?></td>
   <td><?php echo $anItem->getMovementLabel(); ?></td>
@@ -30,4 +35,10 @@
 <?php endforeach; ?>
 </table>
 <br />
+<?php
+
+if ($totalProv) echo sprintf('<b>Total Prov: $%s</b><br/>', number_format($totalProv, 2));
+if ($totalPmt) echo sprintf('<b>Total Pmt: $%s</b><br/>', number_format($totalPmt, 2));
+
+?>
 <br /><a href="<?php echo DIRECTORY_PREFIX; ?>movementTemplate/update">Créer un modèle</a>
